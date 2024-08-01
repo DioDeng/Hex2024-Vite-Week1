@@ -6,7 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
+  base: '/Hex2024-Vite-Week1/',
   plugins: [vue(), vueDevTools()],
   resolve: {
     alias: {
