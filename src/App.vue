@@ -20,18 +20,20 @@
           </td>
           <td>${{ item.price }}</td>
           <td>
-            <button
-              type="button"
-              class="btn"
-              :class="[item.stock === 0 ? 'btn-outline-danger' : 'btn-outline-secondary']"
-              :disabled="item.stock < 1"
-              @click="item.stock--"
-            >
-              -</button
-            ><span class="mx-2">{{ item.stock }}</span
-            ><button type="button" class="btn btn-outline-secondary" @click="item.stock++">
-              +
-            </button>
+            <div class="d-flex align-items-center">
+              <button
+                type="button"
+                class="btn"
+                :class="[item.stock === 0 ? 'btn-outline-danger' : 'btn-outline-secondary']"
+                :disabled="item.stock < 1"
+                @click="item.stock--"
+              >
+                -</button
+              ><span class="mx-2">{{ item.stock }}</span
+              ><button type="button" class="btn btn-outline-secondary" @click="item.stock++">
+                +
+              </button>
+            </div>
           </td>
           <td>
             <button
@@ -49,7 +51,6 @@
                 placeholder="名稱必填"
                 aria-label="Recipient's username"
                 aria-describedby="button-addon2"
-                style="width: 1rem"
                 v-model="tempData.title"
               />
               <button
