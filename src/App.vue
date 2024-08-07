@@ -1,25 +1,62 @@
 <template>
   <section class="container py-5">
     <table class="table table-hover align-middle">
-      <thead>
+      <thead class="bgColor table-dark">
         <tr>
-          <th scope="col">品項</th>
-          <th scope="col">描述</th>
-          <th scope="col">價格</th>
-          <th scope="col">庫存</th>
-          <th scope="col">編輯</th>
+          <th scope="col" style="width: 25%">品項</th>
+          <th scope="col" style="width: 25%">描述</th>
+          <th scope="col" style="width: 25%">價格</th>
+          <th scope="col" style="width: 25%">庫存</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="table-group-divider table-warning">
         <tr v-for="(item, index) in productList" :key="index">
-          <td>
-            {{ item.title }}
+          <td style="width: 25%">
+            <div class="d-flex align-items-center flex-wrap">
+              <span class="me-2"
+                >{{ item.title
+                }}<button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  @click="selectProduct(item, index)"
+                  v-if="tempData.index !== index"
+                >
+                  <i class="bi bi-pencil-fill"></i></button
+              ></span>
+              <div class="input-group" v-if="tempData.index === index">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="名稱必填"
+                  aria-label="Recipient's username"
+                  aria-describedby="button-addon2"
+                  v-model="tempData.title"
+                />
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="button-addon2"
+                  @click="tempData = {}"
+                >
+                  取消
+                </button>
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="button-addon3"
+                  @click="editProduct"
+                  :disabled="!tempData.title"
+                >
+                  確認
+                </button>
+              </div>
+            </div>
           </td>
-          <td>
+          <td style="width: 25%">
             <small>{{ item.describe }}</small>
           </td>
-          <td>${{ item.price }}</td>
-          <td>
+          <td style="width: 25%">${{ item.price }}</td>
+          <td style="width: 25%">
             <div class="d-flex align-items-center">
               <button
                 type="button"
@@ -35,51 +72,38 @@
               </button>
             </div>
           </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-outline-secondary"
-              @click="selectProduct(item, index)"
-              v-if="tempData.index !== index"
-            >
-              編輯名稱
-            </button>
-            <div class="input-group" v-else>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="名稱必填"
-                aria-label="Recipient's username"
-                aria-describedby="button-addon2"
-                v-model="tempData.title"
-              />
-              <button
-                class="btn btn-outline-secondary"
-                type="button"
-                id="button-addon2"
-                @click="tempData = {}"
-              >
-                取消
-              </button>
-              <button
-                class="btn btn-outline-secondary"
-                type="button"
-                id="button-addon3"
-                @click="editProduct"
-                :disabled="!tempData.title"
-              >
-                確認修改
-              </button>
-            </div>
-          </td>
         </tr>
       </tbody>
     </table>
   </section>
 </template>
 
-<style lang="scss">
-@import '@/assets/stylesheets/all';
+<style lang="scss" scoped>
+.table-dark {
+  --bs-table-color: #fff;
+  --bs-table-bg: #973532;
+}
+.table-warning {
+  --bs-table-color: #973532;
+  --bs-table-bg: #ece1cd;
+  --bs-table-hover-color: #973532;
+}
+.btn-outline-secondary {
+  --bs-btn-color: #508897;
+  --bs-btn-border-color: #508897;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #508897;
+  --bs-btn-hover-border-color: #6c757d;
+  --bs-btn-focus-shadow-rgb: 108, 117, 125;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #6c757d;
+  --bs-btn-active-border-color: #6c757d;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #6c757d;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-gradient: none;
+}
 </style>
 
 <script setup>
