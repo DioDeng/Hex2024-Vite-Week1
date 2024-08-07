@@ -1,39 +1,39 @@
 <template>
-  <section class="container py-5">
+  <section class="container-xl py-5">
     <table class="table table-hover align-middle">
       <thead class="bgColor table-dark">
         <tr>
-          <th scope="col" style="width: 25%">品項</th>
+          <th scope="col" style="width: 40%">品項</th>
           <th scope="col" style="width: 25%">描述</th>
-          <th scope="col" style="width: 25%">價格</th>
-          <th scope="col" style="width: 25%">庫存</th>
+          <th scope="col" style="width: 15%">價格</th>
+          <th scope="col" style="width: 20%">庫存</th>
         </tr>
       </thead>
       <tbody class="table-group-divider table-warning">
         <tr v-for="(item, index) in productList" :key="index">
-          <td style="width: 25%">
+          <td style="width: 40%">
             <div class="d-flex align-items-center flex-wrap">
-              <span class="me-2"
-                >{{ item.title
-                }}<button
+              <span
+                ><button
                   type="button"
-                  class="btn btn-outline-secondary"
+                  class="btn btn-outline-secondary me-2"
                   @click="selectProduct(item, index)"
                   v-if="tempData.index !== index"
                 >
                   <i class="bi bi-pencil-fill"></i></button
-              ></span>
-              <div class="input-group" v-if="tempData.index === index">
+                >{{ item.title }}</span
+              >
+              <div class="input-group flex-wrap" v-if="tempData.index === index">
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control rwdWidth"
                   placeholder="名稱必填"
                   aria-label="Recipient's username"
                   aria-describedby="button-addon2"
                   v-model="tempData.title"
                 />
                 <button
-                  class="btn btn-outline-secondary"
+                  class="btn btn-outline-secondary flex-shrink-1"
                   type="button"
                   id="button-addon2"
                   @click="tempData = {}"
@@ -41,7 +41,7 @@
                   取消
                 </button>
                 <button
-                  class="btn btn-outline-secondary"
+                  class="btn btn-outline-secondary flex-shrink-1"
                   type="button"
                   id="button-addon3"
                   @click="editProduct"
@@ -55,8 +55,8 @@
           <td style="width: 25%">
             <small>{{ item.describe }}</small>
           </td>
-          <td style="width: 25%">${{ item.price }}</td>
-          <td style="width: 25%">
+          <td style="width: 15%">${{ item.price }}</td>
+          <td style="width: 20%">
             <div class="d-flex align-items-center">
               <button
                 type="button"
@@ -79,6 +79,11 @@
 </template>
 
 <style lang="scss" scoped>
+@media (max-width: 475px) {
+  .rwdWidth {
+    width: 100%;
+  }
+}
 .table-dark {
   --bs-table-color: #fff;
   --bs-table-bg: #973532;
