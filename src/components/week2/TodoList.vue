@@ -123,6 +123,7 @@ const postTodo = () => {
     )
       .then((res) => {
         console.log(res)
+        getTodoList()
         emitter.emit('messageModal', {
           status: true,
           message: 'update todo success'
